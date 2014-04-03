@@ -9,6 +9,7 @@ package com.hinodesoftworks.kotune;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,7 +18,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.hinodesoftworks.kotune.actors.Background;
+import com.hinodesoftworks.kotune.actors.Enemy;
+import com.hinodesoftworks.kotune.actors.Player;
 
 public class KotuneGame implements ApplicationListener {
 	private OrthographicCamera camera;
@@ -37,6 +42,9 @@ public class KotuneGame implements ApplicationListener {
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
 		
+		Background bg = new Background(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		stage.addActor(bg);
+		
 		Player player = new Player();
 		stage.addActor(player);
 		
@@ -48,6 +56,7 @@ public class KotuneGame implements ApplicationListener {
 		
 		stage.addActor(e1);
 		stage.addActor(e2);
+		
 		
 	}
 
