@@ -1,3 +1,10 @@
+/* 
+ * Date: Apr 3, 2014
+ * Project: legends-of-kotune-android
+ * Package: com.hinodesoftworks.kotune
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.kotune;
 
 import android.os.Bundle;

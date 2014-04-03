@@ -1,3 +1,10 @@
+/* 
+ * Date: Apr 3, 2014
+ * Project: legends-of-kotune
+ * Package: com.hinodesoftworks.kotune
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.kotune;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -9,47 +16,56 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class KotuneGame implements ApplicationListener {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture texture;
-	private Sprite sprite;
+	
+	//sprites
+	private Sprite background;
+	
+	private Stage stage;
+	
+	//movement handler
 	
 	@Override
-	public void create() {		
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
+	public void create() 
+	{		
+		stage = new Stage();
+		Gdx.input.setInputProcessor(stage);
 		
-		camera = new OrthographicCamera(1, h/w);
-		batch = new SpriteBatch();
+		Player player = new Player();
+		stage.addActor(player);
 		
-		texture = new Texture(Gdx.files.internal("data/libgdx.png"));
-		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		Texture enemy1Tex = new Texture(Gdx.files.internal("data/sprites/enemy1.png"));
+		Texture enemy2Tex = new Texture(Gdx.files.internal("data/sprites/enemy2.png"));
 		
-		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
+		Enemy e1 = new Enemy(enemy1Tex, 250, 40);
+		Enemy e2 = new Enemy(enemy2Tex, 500, 40);
 		
-		sprite = new Sprite(region);
-		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
-		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
-		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+		stage.addActor(e1);
+		stage.addActor(e2);
+		
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose() 
+	{
 		batch.dispose();
 		texture.dispose();
+		stage.dispose();
 	}
 
 	@Override
-	public void render() {		
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+	public void render() 
+	{		
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	    //stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 		
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		sprite.draw(batch);
-		batch.end();
 	}
 
 	@Override
