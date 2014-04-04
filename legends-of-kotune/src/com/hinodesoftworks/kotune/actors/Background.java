@@ -12,15 +12,27 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * Represents a static, non interactable actor that spans the entire viewport
+ */
 public class Background extends Actor
 {
 	Texture sprite = new Texture(Gdx.files.internal("data/background.png"));
 	
+	/**
+	 * Instantiates a new background.
+	 *
+	 * @param width the width
+	 * @param height the height
+	 */
 	public Background(float width, float height)
 	{
 		this.setBounds(0, 0, width, height);
 	}
 	
+    /* (non-Javadoc)
+     * @see com.badlogic.gdx.scenes.scene2d.Actor#draw(com.badlogic.gdx.graphics.g2d.Batch, float)
+     */
     @Override
     public void draw(Batch batch, float alpha)
     {

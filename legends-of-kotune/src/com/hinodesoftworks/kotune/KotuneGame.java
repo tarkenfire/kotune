@@ -12,28 +12,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.hinodesoftworks.kotune.actors.Background;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
 
+/**
+ * The Main Game class.
+ */
 public class KotuneGame implements ApplicationListener 
 {	
 	private Stage stage;
 	
 	Label colText;
 	
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#create()
+	 */
 	@Override
 	public void create() 
 	{		
@@ -97,12 +97,18 @@ public class KotuneGame implements ApplicationListener
 		stage.addActor(meh);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#dispose()
+	 */
 	@Override
 	public void dispose() 
 	{
 		stage.dispose();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#render()
+	 */
 	@Override
 	public void render() 
 	{		
@@ -113,6 +119,11 @@ public class KotuneGame implements ApplicationListener
 	}
 	
 	//TODO: Demo method to be removed next week
+	/**
+	 * On hit.
+	 *
+	 * @param hit the hit
+	 */
 	public void onHit(boolean hit)
 	{
 		BitmapFont font = new BitmapFont();
@@ -136,14 +147,23 @@ public class KotuneGame implements ApplicationListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height) {
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#pause()
+	 */
 	@Override
 	public void pause() {
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.ApplicationListener#resume()
+	 */
 	@Override
 	public void resume() {
 	}
