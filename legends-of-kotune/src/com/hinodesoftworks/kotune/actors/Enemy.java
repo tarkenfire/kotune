@@ -30,8 +30,7 @@ public class Enemy extends Actor
 		sprite = enemyTexture;
 		
 		this.addListener(listener);
-		
-		setBounds(initialX, initialY, enemyTexture.getWidth(), enemyTexture.getHeight());
+
 		this.setBounds(x, y, sprite.getWidth(), sprite.getHeight());
 	}
 	
