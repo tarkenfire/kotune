@@ -9,6 +9,7 @@ package com.hinodesoftworks.kotune;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.hinodesoftworks.kotune.actors.Background;
@@ -54,17 +56,22 @@ public class KotuneGame implements ApplicationListener {
 		Enemy e1 = new Enemy(enemy1Tex, 250, 40);
 		Enemy e2 = new Enemy(enemy2Tex, 500, 40);
 		
+		e1.setTouchable(Touchable.enabled);
+		e2.setTouchable(Touchable.enabled);
+		
+		Sound explosion = Gdx.audio.newSound(Gdx.files.internal("data/sfx/explosion.mp3"));
+		Sound tripleShot = Gdx.audio.newSound(Gdx.files.internal("data/sfx/three-shot.mp3"));
+		
+		e1.setSound(explosion);
+		e2.setSound(tripleShot);
+		
 		stage.addActor(e1);
 		stage.addActor(e2);
-		
-		
 	}
 
 	@Override
 	public void dispose() 
 	{
-		batch.dispose();
-		texture.dispose();
 		stage.dispose();
 	}
 
