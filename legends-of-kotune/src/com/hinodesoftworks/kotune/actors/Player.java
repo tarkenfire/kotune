@@ -10,6 +10,7 @@ package com.hinodesoftworks.kotune.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -36,6 +37,12 @@ public class Player extends Actor
 		
 		this.setBounds(x, y, getWidth(), getHeight());
 		this.addListener(listener);
+		
+	}
+	
+	public Rectangle getPlayerBounds()
+	{
+		return new Rectangle(x, y, getWidth(), getHeight());
 	}
 	
     /* (non-Javadoc)
@@ -47,34 +54,13 @@ public class Player extends Actor
         batch.draw(sprite, x, y);
     }
     
-    //TODO demo methods to be removed next week.
-    /**
-     * Sets the handle.
-     *
-     * @param game the new handle
-     */
-    public void setHandle(KotuneGame game)
-    {
-    	gameRef = game;
-    }
-    
     /* (non-Javadoc)
      * @see com.badlogic.gdx.scenes.scene2d.Actor#act(float)
      */
     @Override
 	public void act(float delta)
 	{
-    	Actor hittingActor = this.getStage().hit(x, y, false);
-    	
-    	if (hittingActor != null && hittingActor instanceof Enemy)
-    	{
-    		Gdx.app.log("Hit Detection", "Has Hit");
-    		gameRef.onHit(true);
-    	}
-    	else
-    	{
-    		gameRef.onHit(false);
-    	}
+    	super.act(delta);
 	}
 
 	public InputListener listener = new InputListener()
@@ -84,7 +70,6 @@ public class Player extends Actor
 		{
 			y = newY - sprite.getHeight()/2;
 			x = newX - sprite.getWidth()/2;
-			
 		}    	
 		
 		@Override
@@ -99,6 +84,7 @@ public class Player extends Actor
 				int button)
 		{
 			//setBounds(newX, newY, sprite.getWidth(), sprite.getHeight());
+			
 		}
 		
     };

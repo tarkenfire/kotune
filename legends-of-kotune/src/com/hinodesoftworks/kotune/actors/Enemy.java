@@ -11,6 +11,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -28,12 +29,8 @@ public class Enemy extends Actor
 	
 	boolean isMovingLeft = false;
 	
-	Sound demoSound = null;
+	static final int SPEED = 200;
 	
-	Vector2 start;
-	Vector2 end;
-	
-	float lerpX;
 	
 	/**
 	 * Instantiates a new enemy.
@@ -50,28 +47,29 @@ public class Enemy extends Actor
 		sWidth = Gdx.graphics.getWidth();
 		
 		sprite = enemyTexture;
-		
-		start = new Vector2();
-		end = new Vector2();
-		
-		this.addListener(listener);
 
 		this.setBounds(x, y, sprite.getWidth(), sprite.getHeight());
+		
 	}
 	
-	
-	
+	public Rectangle getEnemyBounds()
+	{
+		return new Rectangle(x, y, getWidth(), getHeight());
+	}
+
 	@Override
 	public void act(float delta)
 	{
 		if (isMovingLeft)
 		{
-			x-=10;	
+			x-= SPEED * delta;	
 		}
 		else
 		{
-			x+=10;
+			x+= SPEED * delta;
 		}
+		
+		this.setBounds(x, y, sprite.getWidth(), sprite.getHeight());
 		
 		if (x + sprite.getWidth() > sWidth)
 		{
@@ -84,17 +82,6 @@ public class Enemy extends Actor
 		}
 		
 	}
-
-	//TODO demo method to be removed in week 2
-	/**
-	 * Sets the sound.
-	 *
-	 * @param sound the new sound
-	 */
-	public void setSound(Sound sound)
-	{
-		demoSound = sound;
-	}
 	
     /* (non-Javadoc)
      * @see com.badlogic.gdx.scenes.scene2d.Actor#draw(com.badlogic.gdx.graphics.g2d.Batch, float)
@@ -104,26 +91,7 @@ public class Enemy extends Actor
     {
         batch.draw(sprite, x, y);
     }
-    
-    //TODO: No input required in week 2
-    public InputListener listener = new InputListener()
-    {
-
-		@Override
-		public boolean touchDown(InputEvent event, float x, float y,
-				int pointer, int button)
-		{
-			if (demoSound != null)
-			{
-				demoSound.play();
-				return true;
-			}
-			
-			
-			return false;
-		}
-    	
-    };
+   
     
     
 }
