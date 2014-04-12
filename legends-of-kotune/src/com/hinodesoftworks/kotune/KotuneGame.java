@@ -50,51 +50,7 @@ public class KotuneGame implements ApplicationListener
 		
 		stage.addActor(player);
 		
-		Texture enemy1Tex = new Texture(Gdx.files.internal("data/sprites/enemy1.png"));
-		Texture enemy2Tex = new Texture(Gdx.files.internal("data/sprites/enemy2.png"));
-		
-		Enemy e1 = new Enemy(enemy1Tex, 300, 40);
-		Enemy e2 = new Enemy(enemy2Tex, 500, 40);
-		
-		e1.setTouchable(Touchable.enabled);
-		e2.setTouchable(Touchable.enabled);
-		
-		Sound explosion = Gdx.audio.newSound(Gdx.files.internal("data/sfx/explosion.mp3"));
-		Sound tripleShot = Gdx.audio.newSound(Gdx.files.internal("data/sfx/three-shot.mp3"));
-		
-		e1.setSound(explosion);
-		e2.setSound(tripleShot);
-		
-		stage.addActor(e1);
-		stage.addActor(e2);
-		
-		
-		BitmapFont font = new BitmapFont();
-		LabelStyle style = new LabelStyle();
-		style.fontColor = Color.GREEN;
-		style.font = font;
-		
-		colText = new Label("No Collision", style);
-		colText.setBounds(200,800,100,40);
-		colText.setFontScale(3);
-		
-		stage.addActor(colText);
-		
-		style.fontColor = Color.WHITE;
-		
-		Label soundLabel = new Label("Tap for Sounds", style);
-		soundLabel.setBounds(350, 350, 100, 40);
-		soundLabel.setFontScale(3);
-		stage.addActor(soundLabel);
-		
-		Label dragLabel = new Label("Drag Up", style);
-		dragLabel.setBounds(20, 350, 100, 40);
-		dragLabel.setFontScale(3);
-		stage.addActor(dragLabel);
-		
-		//collision detection enemy
-		Enemy meh = new Enemy(enemy1Tex, 20, 700);
-		stage.addActor(meh);
+
 	}
 
 	/* (non-Javadoc)

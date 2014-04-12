@@ -31,7 +31,10 @@ public class Player extends Actor
 	 */
 	public Player()
 	{
-		this.setBounds(x, y, sprite.getWidth(), sprite.getHeight());
+		this.setWidth(sprite.getWidth());
+		this.setHeight(sprite.getHeight());
+		
+		this.setBounds(x, y, getWidth(), getHeight());
 		this.addListener(listener);
 	}
 	
@@ -79,7 +82,9 @@ public class Player extends Actor
 		@Override
 		public void touchDragged(InputEvent event, float newX, float newY, int pointer)
 		{
-			y = newY;
+			y = newY - sprite.getHeight()/2;
+			x = newX - sprite.getWidth()/2;
+			
 		}    	
 		
 		@Override
@@ -90,10 +95,10 @@ public class Player extends Actor
 		}
 
 		@Override
-		public void touchUp(InputEvent event, float x, float y, int pointer,
+		public void touchUp(InputEvent event, float newX, float newY, int pointer,
 				int button)
 		{
-			//setBounds(x, y, sprite.getWidth(), sprite.getHeight());
+			//setBounds(newX, newY, sprite.getWidth(), sprite.getHeight());
 		}
 		
     };

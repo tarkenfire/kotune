@@ -7,9 +7,11 @@
  */
 package com.hinodesoftworks.kotune.actors;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -22,7 +24,16 @@ public class Enemy extends Actor
 	Texture sprite;
 	float x = 0, y = 0;
 	
+	float sWidth = 0, sHeight = 0;
+	
+	boolean isMovingLeft = false;
+	
 	Sound demoSound = null;
+	
+	Vector2 start;
+	Vector2 end;
+	
+	float lerpX;
 	
 	/**
 	 * Instantiates a new enemy.
@@ -36,13 +47,44 @@ public class Enemy extends Actor
 		this.x = initialX;
 		this.y = initialY;
 		
+		sWidth = Gdx.graphics.getWidth();
+		
 		sprite = enemyTexture;
+		
+		start = new Vector2();
+		end = new Vector2();
 		
 		this.addListener(listener);
 
 		this.setBounds(x, y, sprite.getWidth(), sprite.getHeight());
 	}
 	
+	
+	
+	@Override
+	public void act(float delta)
+	{
+		if (isMovingLeft)
+		{
+			x-=10;	
+		}
+		else
+		{
+			x+=10;
+		}
+		
+		if (x + sprite.getWidth() > sWidth)
+		{
+			isMovingLeft = true;
+		}
+		
+		if (x < 0)
+		{
+			isMovingLeft = false;
+		}
+		
+	}
+
 	//TODO demo method to be removed in week 2
 	/**
 	 * Sets the sound.
