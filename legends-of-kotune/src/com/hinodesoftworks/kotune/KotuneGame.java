@@ -105,7 +105,7 @@ public class KotuneGame implements ApplicationListener
 	    
 	    if (colManager.hasPlayerCollided())
 	    {
-	    	Gdx.app.log("SO HIT", "MUCH COLLIDE");
+	    	player.killPlayer();
 	    }
 	}
 

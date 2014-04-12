@@ -8,13 +8,15 @@
 package com.hinodesoftworks.kotune.actors;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.hinodesoftworks.kotune.KotuneGame;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 /**
  * An Actor that represents the human player
@@ -24,8 +26,9 @@ public class Player extends Actor
 	Texture sprite = new Texture(Gdx.files.internal("data/sprites/player.png"));
 	float x = 20, y = 20;
 	
-	//TODO: Remove next week
-	private KotuneGame gameRef = null;
+	boolean isAlive = true;
+	
+	Sound deathSound;
 	
 	/**
 	 * Instantiates a new player.
@@ -35,6 +38,8 @@ public class Player extends Actor
 		this.setWidth(sprite.getWidth());
 		this.setHeight(sprite.getHeight());
 		
+		deathSound = Gdx.audio.newSound(Gdx.files.internal("data/sfx/explosion.mp3"));
+		
 		this.setBounds(x, y, getWidth(), getHeight());
 		this.addListener(listener);
 		
@@ -43,6 +48,31 @@ public class Player extends Actor
 	public Rectangle getPlayerBounds()
 	{
 		return new Rectangle(x, y, getWidth(), getHeight());
+	}
+	
+	public void killPlayer()
+	{
+		x = 20;
+		y = 20;
+		
+		if (isAlive)
+		{
+			deathSound.play();
+			isAlive = false;
+		}
+		
+		//hacky way to only play sound once, reset sentinal boolean after timer
+		Timer.schedule(new Task()
+		{
+			@Override
+			public void run()
+			{
+				isAlive = true;
+			}
+			
+		}, .5f);
+		
+
 	}
 	
     /* (non-Javadoc)
