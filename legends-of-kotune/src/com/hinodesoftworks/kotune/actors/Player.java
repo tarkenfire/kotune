@@ -27,8 +27,10 @@ public class Player extends Actor
 	float x = 20, y = 20;
 	
 	boolean isAlive = true;
+	boolean hasWon = false;
 	
 	Sound deathSound;
+	Sound winSound;
 	
 	/**
 	 * Instantiates a new player.
@@ -39,6 +41,7 @@ public class Player extends Actor
 		this.setHeight(sprite.getHeight());
 		
 		deathSound = Gdx.audio.newSound(Gdx.files.internal("data/sfx/explosion.mp3"));
+		winSound = Gdx.audio.newSound(Gdx.files.internal("data/sfx/victory.mp3"));
 		
 		this.setBounds(x, y, getWidth(), getHeight());
 		this.addListener(listener);
@@ -71,8 +74,29 @@ public class Player extends Actor
 			}
 			
 		}, .5f);
+	}
+	
+	public void winGame()
+	{
+		x = 20;
+		y = 20;
 		
-
+		if (!hasWon)
+		{
+			winSound.play();
+			hasWon = true;
+		}
+		
+		//hacky way to only play sound once, reset sentinal boolean after timer
+		Timer.schedule(new Task()
+		{
+			@Override
+			public void run()
+			{
+				hasWon = false;
+			}
+			
+		}, .5f);
 	}
 	
     /* (non-Javadoc)

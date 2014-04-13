@@ -9,29 +9,16 @@ package com.hinodesoftworks.kotune;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.hinodesoftworks.kotune.actors.Background;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
@@ -51,6 +38,7 @@ public class KotuneGame implements ApplicationListener
 	Rectangle rect;
 	
 	CollisionManager colManager;
+	Vector2 victoryPoint;
 	
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.ApplicationListener#create()
@@ -81,6 +69,20 @@ public class KotuneGame implements ApplicationListener
 		stage.addActor(enemy2);
 		
 		colManager.addEnemy(enemy2);
+		
+		BitmapFont font = new BitmapFont();
+
+		LabelStyle style = new LabelStyle();
+	    style.fontColor = Color.GREEN;
+		style.font = font;
+		
+		colText = new Label("<< Point of Supreme Victory", style);
+		colText.setBounds(190,1100,100,40);
+		colText.setFontScale(3);
+		stage.addActor(colText);
+		
+		victoryPoint = new Vector2(140, 1100);
+
 	}
 
 	/* (non-Javadoc)
@@ -102,10 +104,16 @@ public class KotuneGame implements ApplicationListener
 		
 	    stage.act(Gdx.graphics.getDeltaTime());
 	    stage.draw();
-	    
+	 
+	    //handle collisions
 	    if (colManager.hasPlayerCollided())
 	    {
 	    	player.killPlayer();
+	    }
+	    
+	    if (colManager.hasPlayerReachedPoint(victoryPoint))
+	    {
+	    	player.winGame();
 	    }
 	}
 
