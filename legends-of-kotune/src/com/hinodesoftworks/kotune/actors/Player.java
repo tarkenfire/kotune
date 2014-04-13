@@ -1,5 +1,5 @@
 /* 
- * Date: Apr 3, 2014
+ * Date: Apr 12, 2014
  * Project: legends-of-kotune
  * Package: com.hinodesoftworks.kotune.actors
  * @author Michael Mancuso
@@ -18,8 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+// TODO: Auto-generated Javadoc
 /**
- * An Actor that represents the human player
+ * An Actor that represents the human player.
  */
 public class Player extends Actor
 {
@@ -48,11 +49,19 @@ public class Player extends Actor
 		
 	}
 	
+	/**
+	 * Gets the player bounds.
+	 *
+	 * @return the player bounds
+	 */
 	public Rectangle getPlayerBounds()
 	{
 		return new Rectangle(x, y, getWidth(), getHeight());
 	}
 	
+	/**
+	 * Kill player.
+	 */
 	public void killPlayer()
 	{
 		x = 20;
@@ -76,6 +85,9 @@ public class Player extends Actor
 		}, .5f);
 	}
 	
+	/**
+	 * Win game.
+	 */
 	public void winGame()
 	{
 		x = 20;

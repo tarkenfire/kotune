@@ -1,3 +1,10 @@
+/* 
+ * Date: Apr 12, 2014
+ * Project: legends-of-kotune
+ * Package: com.hinodesoftworks.kotune.managers
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.kotune.managers;
 
 import java.util.ArrayList;
@@ -9,6 +16,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CollisionManager.
+ */
 public class CollisionManager
 {
 	private static CollisionManager _instance = null;
@@ -20,6 +31,11 @@ public class CollisionManager
 	private Rectangle collisionRect;
 	
 	
+	/**
+	 * Instantiates a new collision manager.
+	 *
+	 * @param playerRef the player ref
+	 */
 	private CollisionManager(Player playerRef)
 	{
 		enemyList = new ArrayList<Enemy>();
@@ -28,6 +44,12 @@ public class CollisionManager
 		this.collisionRect = new Rectangle();
 	}
 	
+	/**
+	 * Gets the single instance of CollisionManager.
+	 *
+	 * @param playerRef the player ref
+	 * @return single instance of CollisionManager
+	 */
 	public static CollisionManager getInstance(Player playerRef)
 	{
 		if (_instance == null)
@@ -38,17 +60,33 @@ public class CollisionManager
 		return _instance;
 	}
 	
+	/**
+	 * Adds the enemy.
+	 *
+	 * @param newEnemy the new enemy
+	 */
 	public void addEnemy(Enemy newEnemy)
 	{
 		this.enemyList.add(newEnemy);
 	}
 	
+	/**
+	 * Removes the enemy.
+	 *
+	 * @param enemyToRemove the enemy to remove
+	 * @return true, if successful
+	 */
 	public boolean removeEnemy(Enemy enemyToRemove)
 	{
 		return this.enemyList.remove(enemyToRemove);
 	}
 	
 	
+	/**
+	 * Checks for player collided.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean hasPlayerCollided()
 	{
 		
@@ -67,6 +105,12 @@ public class CollisionManager
 		return false;
 	}
 	
+	/**
+	 * Checks for player reached point.
+	 *
+	 * @param point the point
+	 * @return true, if successful
+	 */
 	public boolean hasPlayerReachedPoint(Vector2 point)
 	{
 		victoryPoint = new Rectangle(point.x, point.y, 1, 1);

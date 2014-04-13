@@ -1,5 +1,5 @@
 /* 
- * Date: Apr 3, 2014
+ * Date: Apr 12, 2014
  * Project: legends-of-kotune
  * Package: com.hinodesoftworks.kotune.actors
  * @author Michael Mancuso
@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+// TODO: Auto-generated Javadoc
 /**
  * Represents an Actor which the player must defeat.
  */
@@ -48,11 +49,19 @@ public class Enemy extends Actor
 		
 	}
 	
+	/**
+	 * Gets the enemy bounds.
+	 *
+	 * @return the enemy bounds
+	 */
 	public Rectangle getEnemyBounds()
 	{
 		return new Rectangle(x, y, getWidth(), getHeight());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.scenes.scene2d.Actor#act(float)
+	 */
 	@Override
 	public void act(float delta)
 	{

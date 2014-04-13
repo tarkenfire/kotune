@@ -1,5 +1,5 @@
 /* 
- * Date: Apr 3, 2014
+ * Date: Apr 12, 2014
  * Project: legends-of-kotune
  * Package: com.hinodesoftworks.kotune
  * @author Michael Mancuso
@@ -24,6 +24,7 @@ import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
 import com.hinodesoftworks.kotune.managers.CollisionManager;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Main Game class.
  */
