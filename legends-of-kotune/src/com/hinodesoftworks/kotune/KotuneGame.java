@@ -17,12 +17,18 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.hinodesoftworks.kotune.actors.Background;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
 import com.hinodesoftworks.kotune.managers.CollisionManager;
+import com.hinodesoftworks.kotune.managers.GameManager;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,12 +39,14 @@ public class KotuneGame implements ApplicationListener
 	private Stage stage;
 	
 	Label colText;
+	TextButton pauseButton;
 	Player player;
-	Enemy enemy, enemy2;
+	
+	int counter = 0;
 	
 	Rectangle rect;
 	
-	CollisionManager colManager;
+	GameManager gameManager;
 	Vector2 victoryPoint;
 	
 	/* (non-Javadoc)
@@ -49,41 +57,54 @@ public class KotuneGame implements ApplicationListener
 	{		
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
-		
-		
+
 		Background bg = new Background(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		stage.addActor(bg);
-		
 		player = new Player();
 		player.setTouchable(Touchable.enabled);
 		
-		stage.addActor(player);
+		gameManager = GameManager.getInstance(stage, player);
 		
-		colManager = CollisionManager.getInstance(player);
+		gameManager.addActor(bg);
+		gameManager.addActor(player);
 		
-		enemy = new Enemy(new Texture(Gdx.files.internal("data/sprites/enemy1.png")), 100, 350);
-		stage.addActor(enemy);
-		
-		colManager.addEnemy(enemy);
-		
-		enemy2 = new Enemy(new Texture(Gdx.files.internal("data/sprites/enemy1.png")), 300, 700);
-		stage.addActor(enemy2);
-		
-		colManager.addEnemy(enemy2);
+		Enemy enemy = new Enemy(new Texture(Gdx.files.internal("data/sprites/enemy1.png")), 100, 350);
+		gameManager.addActor(enemy);
 		
 		BitmapFont font = new BitmapFont();
 
+		font.setScale(3);
+		
+		//UI element, score label
 		LabelStyle style = new LabelStyle();
-	    style.fontColor = Color.GREEN;
+	    style.fontColor = Color.WHITE;
 		style.font = font;
 		
-		colText = new Label("<< Point of Supreme Victory", style);
-		colText.setBounds(190,1100,100,40);
+		colText = new Label("0000", style);
+		colText.setBounds(Gdx.graphics.getWidth() - 120, Gdx.graphics.getHeight() - 60,100,40);
 		colText.setFontScale(3);
-		stage.addActor(colText);
 		
-		victoryPoint = new Vector2(140, 1100);
-
+		//pause button
+	    TextButtonStyle textButtonStyle = new TextButtonStyle();
+	    textButtonStyle.font = font;
+	    
+	    
+	    pauseButton = new TextButton("Pause", textButtonStyle);
+	    pauseButton.setSize(100, 50);
+	    pauseButton.setBounds(50, Gdx.graphics.getHeight() - 60, 100, 50);
+	    
+	    pauseButton.addListener(new ChangeListener() 
+	    {
+	        public void changed (ChangeEvent event, Actor actor) 
+	        {
+	        	gameManager.toggleGameState();
+	        	pauseButton.getLabel().setText("Resume");
+	        	
+	        }
+	    });
+	    
+	    //add ui
+		gameManager.addActor(colText);
+		gameManager.addActor(pauseButton);
 	}
 
 	/* (non-Javadoc)
@@ -101,21 +122,8 @@ public class KotuneGame implements ApplicationListener
 	@Override
 	public void render() 
 	{		
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-	    stage.act(Gdx.graphics.getDeltaTime());
-	    stage.draw();
+		gameManager.update();
 	 
-	    //handle collisions
-	    if (colManager.hasPlayerCollided())
-	    {
-	    	player.killPlayer();
-	    }
-	    
-	    if (colManager.hasPlayerReachedPoint(victoryPoint))
-	    {
-	    	player.winGame();
-	    }
 	}
 
 

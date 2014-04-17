@@ -28,7 +28,7 @@ public class Player extends Actor
 	float x = 20, y = 20;
 	
 	boolean isAlive = true;
-	boolean hasWon = false;
+	boolean inputActive = true;
 	
 	Sound deathSound;
 	Sound winSound;
@@ -85,31 +85,6 @@ public class Player extends Actor
 		}, .5f);
 	}
 	
-	/**
-	 * Win game.
-	 */
-	public void winGame()
-	{
-		x = 20;
-		y = 20;
-		
-		if (!hasWon)
-		{
-			winSound.play();
-			hasWon = true;
-		}
-		
-		//hacky way to only play sound once, reset sentinal boolean after timer
-		Timer.schedule(new Task()
-		{
-			@Override
-			public void run()
-			{
-				hasWon = false;
-			}
-			
-		}, .5f);
-	}
 	
     /* (non-Javadoc)
      * @see com.badlogic.gdx.scenes.scene2d.Actor#draw(com.badlogic.gdx.graphics.g2d.Batch, float)
@@ -134,6 +109,8 @@ public class Player extends Actor
 		@Override
 		public void touchDragged(InputEvent event, float newX, float newY, int pointer)
 		{
+			//if (!inputActive) return;
+			
 			y = newY - sprite.getHeight()/2;
 			x = newX - sprite.getWidth()/2;
 		}    	
@@ -148,9 +125,7 @@ public class Player extends Actor
 		@Override
 		public void touchUp(InputEvent event, float newX, float newY, int pointer,
 				int button)
-		{
-			//setBounds(newX, newY, sprite.getWidth(), sprite.getHeight());
-			
+		{	
 		}
 		
     };
