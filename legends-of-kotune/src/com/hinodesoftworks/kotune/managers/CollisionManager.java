@@ -81,6 +81,11 @@ public class CollisionManager
 		return this.enemyList.remove(enemyToRemove);
 	}
 	
+	public int getEnemyCount()
+	{
+		return enemyList.size();
+	}
+	
 	
 	/**
 	 * Checks for player collided.

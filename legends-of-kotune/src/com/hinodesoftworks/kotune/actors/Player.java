@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+import com.hinodesoftworks.kotune.listeners.GameEndedListener;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,6 +41,8 @@ public class Player extends Actor
 	
 	Animation shipAnimation;
 	float time;
+	
+	GameEndedListener gameListener;
 	
 	/**
 	 * Instantiates a new player.
@@ -67,7 +70,11 @@ public class Player extends Actor
 		
 		this.setBounds(x, y, getWidth(), getHeight());
 		this.addListener(listener);
-		
+	}
+	
+	public void setGameListener(GameEndedListener gel)
+	{
+		this.gameListener = gel;
 	}
 	
 	/**
@@ -92,6 +99,7 @@ public class Player extends Actor
 		{
 			deathSound.play();
 			isAlive = false;
+			gameListener.onGameEnded();
 		}
 		
 		//hacky way to only play sound once, reset sentinal boolean after timer

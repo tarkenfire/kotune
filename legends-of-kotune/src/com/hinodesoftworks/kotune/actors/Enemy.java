@@ -12,13 +12,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.hinodesoftworks.kotune.listeners.EnemyChangeListener;
+import com.hinodesoftworks.kotune.listeners.ScoreListener;
 
 // TODO: Auto-generated Javadoc
 /**
  * Represents an Actor which the player must defeat.
  */
 public class Enemy extends Actor
-{
+{	
 	Texture sprite;
 	float x = 0, y = 0;
 	
@@ -26,8 +28,10 @@ public class Enemy extends Actor
 	
 	boolean isMovingLeft = false;
 	
-	static final int SPEED = 200;
+	static final int SPEED = 400;
 	
+	EnemyChangeListener eListener;
+	ScoreListener sListener;
 	
 	/**
 	 * Instantiates a new enemy.
@@ -46,7 +50,16 @@ public class Enemy extends Actor
 		sprite = enemyTexture;
 
 		this.setBounds(x, y, sprite.getWidth(), sprite.getHeight());
-		
+	}
+	
+	public void setEnemyListener(EnemyChangeListener ecl)
+	{
+		this.eListener = ecl;
+	}
+	
+	public void setScoreListener(ScoreListener sl)
+	{
+		this.sListener = sl;
 	}
 	
 	/**
@@ -65,25 +78,12 @@ public class Enemy extends Actor
 	@Override
 	public void act(float delta)
 	{
-		if (isMovingLeft)
-		{
-			x-= SPEED * delta;	
-		}
-		else
-		{
-			x+= SPEED * delta;
-		}
+		y-= SPEED*delta;
 		
-		this.setBounds(x, y, sprite.getWidth(), sprite.getHeight());
-		
-		if (x + sprite.getWidth() > sWidth)
+		if (y <= -200)
 		{
-			isMovingLeft = true;
-		}
-		
-		if (x < 0)
-		{
-			isMovingLeft = false;
+			eListener.onEnemyLeftScreen(this);
+			sListener.onScore();
 		}
 		
 	}

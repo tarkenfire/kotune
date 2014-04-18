@@ -27,6 +27,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.hinodesoftworks.kotune.actors.Background;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
+import com.hinodesoftworks.kotune.listeners.GameEndedListener;
+import com.hinodesoftworks.kotune.listeners.ScoreListener;
 import com.hinodesoftworks.kotune.managers.CollisionManager;
 import com.hinodesoftworks.kotune.managers.GameManager;
 
@@ -34,7 +36,7 @@ import com.hinodesoftworks.kotune.managers.GameManager;
 /**
  * The Main Game class.
  */
-public class KotuneGame implements ApplicationListener 
+public class KotuneGame implements ApplicationListener, ScoreListener, GameEndedListener
 {	
 	private Stage stage;
 	
@@ -43,6 +45,8 @@ public class KotuneGame implements ApplicationListener
 	Player player;
 	
 	int counter = 0;
+	
+	int score = 0;
 	
 	Rectangle rect;
 	
@@ -62,13 +66,13 @@ public class KotuneGame implements ApplicationListener
 		player = new Player();
 		player.setTouchable(Touchable.enabled);
 		
+		player.setGameListener(this);
+		
 		gameManager = GameManager.getInstance(stage, player);
+		gameManager.setGameInstance(this);
 		
 		gameManager.addActor(bg);
 		gameManager.addActor(player);
-		
-		Enemy enemy = new Enemy(new Texture(Gdx.files.internal("data/sprites/enemy1.png")), 100, 350);
-		gameManager.addActor(enemy);
 		
 		BitmapFont font = new BitmapFont();
 
@@ -79,7 +83,7 @@ public class KotuneGame implements ApplicationListener
 	    style.fontColor = Color.WHITE;
 		style.font = font;
 		
-		colText = new Label("0000", style);
+		colText = new Label("0", style);
 		colText.setBounds(Gdx.graphics.getWidth() - 120, Gdx.graphics.getHeight() - 60,100,40);
 		colText.setFontScale(3);
 		
@@ -97,7 +101,6 @@ public class KotuneGame implements ApplicationListener
 	        public void changed (ChangeEvent event, Actor actor) 
 	        {
 	        	gameManager.toggleGameState();
-	        	pauseButton.getLabel().setText("Resume");
 	        	
 	        }
 	    });
@@ -126,7 +129,6 @@ public class KotuneGame implements ApplicationListener
 	 
 	}
 
-
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.ApplicationListener#resize(int, int)
 	 */
@@ -146,5 +148,41 @@ public class KotuneGame implements ApplicationListener
 	 */
 	@Override
 	public void resume() {
+	}
+
+	@Override
+	public void onScore()
+	{
+		score++;
+		colText.setText(Integer.toString(score));
+		
+	}
+
+	@Override
+	public void onGameEnded()
+	{
+	    TextButtonStyle textButtonStyle = new TextButtonStyle();
+	    BitmapFont font = new BitmapFont();
+	    font.setScale(3);
+	    textButtonStyle.font = font;
+	    
+	    final TextButton retry = new TextButton("Game Over. Retry?", textButtonStyle);
+	    retry.setSize(200, 40);
+	    retry.setBounds(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 , 200, 40);
+		  
+	    retry.addListener(new ChangeListener() 
+	    {
+	        public void changed (ChangeEvent event, Actor actor) 
+	        {
+	        	gameManager.toggleGameState();
+	        	score = 0;
+	        	colText.setText("0");
+	        	gameManager.removeActor(retry);
+	        	
+	        }
+	    });
+	    gameManager.addActor(retry);
+	    gameManager.disposeAllEnemies();
+		gameManager.toggleGameState();
 	}
 }
