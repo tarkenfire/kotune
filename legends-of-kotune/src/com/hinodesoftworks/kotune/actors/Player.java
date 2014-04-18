@@ -10,7 +10,9 @@ package com.hinodesoftworks.kotune.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -31,7 +33,13 @@ public class Player extends Actor
 	boolean inputActive = true;
 	
 	Sound deathSound;
-	Sound winSound;
+	
+	Texture spriteSheet;
+	TextureRegion[] spriteFrames;
+	TextureRegion currentFrame;
+	
+	Animation shipAnimation;
+	float time;
 	
 	/**
 	 * Instantiates a new player.
@@ -42,7 +50,20 @@ public class Player extends Actor
 		this.setHeight(sprite.getHeight());
 		
 		deathSound = Gdx.audio.newSound(Gdx.files.internal("data/sfx/explosion.mp3"));
-		winSound = Gdx.audio.newSound(Gdx.files.internal("data/sfx/victory.mp3"));
+	
+		//get animation frames
+		spriteSheet = new Texture(Gdx.files.internal("data/spritesheets/player_s.png"));
+		spriteFrames = new TextureRegion[6];
+		
+		int index = 0;
+		for (int y = 0; y < 1536; y += 256)
+		{
+			spriteFrames[index++] = new TextureRegion(spriteSheet, 0, y, 128, 256);
+		}
+		
+		shipAnimation = new Animation(.025f, spriteFrames);
+		time = 0f;
+		
 		
 		this.setBounds(x, y, getWidth(), getHeight());
 		this.addListener(listener);
@@ -92,7 +113,10 @@ public class Player extends Actor
     @Override
     public void draw(Batch batch, float alpha)
     {
-        batch.draw(sprite, x, y);
+    	time+= Gdx.graphics.getDeltaTime();
+    	currentFrame = shipAnimation.getKeyFrame(time, true);
+    	
+        batch.draw(currentFrame, x, y);
     }
     
     /* (non-Javadoc)
