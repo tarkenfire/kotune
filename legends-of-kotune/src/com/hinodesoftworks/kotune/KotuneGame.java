@@ -8,6 +8,7 @@
 package com.hinodesoftworks.kotune;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -36,7 +37,7 @@ import com.hinodesoftworks.kotune.managers.GameManager;
 /**
  * The Main Game class.
  */
-public class KotuneGame implements ApplicationListener, ScoreListener, GameEndedListener
+public class KotuneGame extends Game implements ScoreListener, GameEndedListener
 {	
 	private Stage stage;
 	
