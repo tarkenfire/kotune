@@ -32,27 +32,22 @@ import com.hinodesoftworks.kotune.listeners.GameEndedListener;
 import com.hinodesoftworks.kotune.listeners.ScoreListener;
 import com.hinodesoftworks.kotune.managers.CollisionManager;
 import com.hinodesoftworks.kotune.managers.GameManager;
+import com.hinodesoftworks.kotune.screens.CreditsScreen;
+import com.hinodesoftworks.kotune.screens.GameScreen;
+import com.hinodesoftworks.kotune.screens.MenuScreen;
+import com.hinodesoftworks.kotune.screens.SplashScreen;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Main Game class.
  */
-public class KotuneGame extends Game implements ScoreListener, GameEndedListener
-{	
-	private Stage stage;
+public class KotuneGame extends Game
+{		
 	
-	Label colText;
-	TextButton pauseButton;
-	Player player;
-	
-	int counter = 0;
-	
-	int score = 0;
-	
-	Rectangle rect;
-	
-	GameManager gameManager;
-	Vector2 victoryPoint;
+	GameScreen gameScreen;
+	SplashScreen splashScreen;
+	MenuScreen menuScreen;
+	CreditsScreen creditsScene;
 	
 	/* (non-Javadoc)
 	 * @see com.badlogic.gdx.ApplicationListener#create()
@@ -60,130 +55,26 @@ public class KotuneGame extends Game implements ScoreListener, GameEndedListener
 	@Override
 	public void create() 
 	{		
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
-
-		Background bg = new Background(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		player = new Player();
-		player.setTouchable(Touchable.enabled);
+		splashScreen = new SplashScreen(this);
+		menuScreen = new MenuScreen(this);
 		
-		player.setGameListener(this);
-		
-		gameManager = GameManager.getInstance(stage, player);
-		gameManager.setGameInstance(this);
-		
-		gameManager.addActor(bg);
-		gameManager.addActor(player);
-		
-		BitmapFont font = new BitmapFont();
-
-		font.setScale(3);
-		
-		//UI element, score label
-		LabelStyle style = new LabelStyle();
-	    style.fontColor = Color.WHITE;
-		style.font = font;
-		
-		colText = new Label("0", style);
-		colText.setBounds(Gdx.graphics.getWidth() - 120, Gdx.graphics.getHeight() - 60,100,40);
-		colText.setFontScale(3);
-		
-		//pause button
-	    TextButtonStyle textButtonStyle = new TextButtonStyle();
-	    textButtonStyle.font = font;
-	    
-	    
-	    pauseButton = new TextButton("Pause", textButtonStyle);
-	    pauseButton.setSize(100, 50);
-	    pauseButton.setBounds(50, Gdx.graphics.getHeight() - 60, 100, 50);
-	    
-	    pauseButton.addListener(new ChangeListener() 
-	    {
-	        public void changed (ChangeEvent event, Actor actor) 
-	        {
-	        	gameManager.toggleGameState();
-	        	
-	        }
-	    });
-	    
-	    //add ui
-		gameManager.addActor(colText);
-		gameManager.addActor(pauseButton);
+		setScreen(splashScreen);
 	}
-
-	/* (non-Javadoc)
-	 * @see com.badlogic.gdx.ApplicationListener#dispose()
-	 */
-	@Override
-	public void dispose() 
+	
+	public void transitionToMenu()
 	{
-		stage.dispose();
+		setScreen(menuScreen);
 	}
-
-	/* (non-Javadoc)
-	 * @see com.badlogic.gdx.ApplicationListener#render()
-	 */
-	@Override
-	public void render() 
-	{		
-		gameManager.update();
-	 
-	}
-
-	/* (non-Javadoc)
-	 * @see com.badlogic.gdx.ApplicationListener#resize(int, int)
-	 */
-	@Override
-	public void resize(int width, int height) {
-	}
-
-	/* (non-Javadoc)
-	 * @see com.badlogic.gdx.ApplicationListener#pause()
-	 */
-	@Override
-	public void pause() {
-	}
-
-	/* (non-Javadoc)
-	 * @see com.badlogic.gdx.ApplicationListener#resume()
-	 */
-	@Override
-	public void resume() {
-	}
-
-	@Override
-	public void onScore()
+	
+	public void transitionToGame()
 	{
-		score++;
-		colText.setText(Integer.toString(score));
 		
 	}
-
-	@Override
-	public void onGameEnded()
+	
+	public void transitionToCredits()
 	{
-	    TextButtonStyle textButtonStyle = new TextButtonStyle();
-	    BitmapFont font = new BitmapFont();
-	    font.setScale(3);
-	    textButtonStyle.font = font;
-	    
-	    final TextButton retry = new TextButton("Game Over. Retry?", textButtonStyle);
-	    retry.setSize(200, 40);
-	    retry.setBounds(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 , 200, 40);
-		  
-	    retry.addListener(new ChangeListener() 
-	    {
-	        public void changed (ChangeEvent event, Actor actor) 
-	        {
-	        	gameManager.toggleGameState();
-	        	score = 0;
-	        	colText.setText("0");
-	        	gameManager.removeActor(retry);
-	        	
-	        }
-	    });
-	    gameManager.addActor(retry);
-	    gameManager.disposeAllEnemies();
-		gameManager.toggleGameState();
+		
 	}
+	
+	public void transitionToInstructions(){}
 }

@@ -30,6 +30,12 @@ public class Background extends Actor
 		this.setBounds(0, 0, width, height);
 	}
 	
+	public Background(float width, float height, Texture background)
+	{
+		this(width, height);
+		sprite = background;
+	}
+	
     /* (non-Javadoc)
      * @see com.badlogic.gdx.scenes.scene2d.Actor#draw(com.badlogic.gdx.graphics.g2d.Batch, float)
      */

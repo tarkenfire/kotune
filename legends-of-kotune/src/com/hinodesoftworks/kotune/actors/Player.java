@@ -67,7 +67,6 @@ public class Player extends Actor
 		shipAnimation = new Animation(.025f, spriteFrames);
 		time = 0f;
 		
-		
 		this.setBounds(x, y, getWidth(), getHeight());
 		this.addListener(listener);
 	}

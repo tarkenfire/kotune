@@ -7,15 +7,39 @@
  */
 package com.hinodesoftworks.kotune.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.hinodesoftworks.kotune.KotuneGame;
+import com.hinodesoftworks.kotune.actors.Background;
 
 public class MenuScreen implements Screen
 {
+	KotuneGame gameRef;
+	
+	Stage stage;
+	Background bg;
+	
+	TextButton playButton, instructButton, creditButton;
+
+	public MenuScreen(KotuneGame ref)
+	{
+		this.gameRef = ref;
+	}
 
 	@Override
 	public void render(float delta)
 	{
-		// TODO Auto-generated method stub
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		stage.draw();
 		
 	}
 
@@ -29,7 +53,63 @@ public class MenuScreen implements Screen
 	@Override
 	public void show()
 	{
-		// TODO Auto-generated method stub
+		stage = new Stage();
+		bg = new Background(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 
+				new Texture(Gdx.files.internal("data/main.png")));
+		
+		//setup horrid text buttons
+		BitmapFont font = new BitmapFont();
+		font.setScale(6);
+		
+	    TextButtonStyle textButtonStyle = new TextButtonStyle();
+	    textButtonStyle.font = font;
+	    
+	    playButton = new TextButton("Play Game", textButtonStyle);
+	    playButton.setSize(300, 50);
+	    playButton.setBounds(Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight() / 2, 300, 50);
+	    
+	    instructButton = new TextButton("Instructions", textButtonStyle);
+	    instructButton.setSize(300, 50);
+	    instructButton.setBounds(playButton.getX(), playButton.getY() - 200 , 300, 50);
+	    
+	    creditButton = new TextButton("Credits", textButtonStyle);
+	    creditButton.setSize(300, 50);
+	    creditButton.setBounds(instructButton.getX(), instructButton.getY() - 200, 300, 50);
+	    
+	    
+	    //button listeners
+	    playButton.addListener(new ChangeListener() 
+	    {
+	        public void changed (ChangeEvent event, Actor actor) 
+	        {
+	        	gameRef.transitionToGame();
+	        }
+	    });
+	    
+	    instructButton.addListener(new ChangeListener() 
+	    {
+	        public void changed (ChangeEvent event, Actor actor) 
+	        {
+	        	gameRef.transitionToInstructions();
+	        }
+	    });
+	    
+	    creditButton.addListener(new ChangeListener() 
+	    {
+	        public void changed (ChangeEvent event, Actor actor) 
+	        {
+	        	gameRef.transitionToCredits();
+	        }
+	    });
+	    
+	    
+	    //add to stage
+	    stage.addActor(bg);
+	    stage.addActor(playButton);
+	    stage.addActor(instructButton);
+	    stage.addActor(creditButton);
+	    
+	    
 		
 	}
 

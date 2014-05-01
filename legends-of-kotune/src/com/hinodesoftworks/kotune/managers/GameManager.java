@@ -18,6 +18,7 @@ import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
 import com.hinodesoftworks.kotune.listeners.EnemyChangeListener;
+import com.hinodesoftworks.kotune.screens.GameScreen;
 
 public class GameManager implements EnemyChangeListener
 {
@@ -29,7 +30,7 @@ public class GameManager implements EnemyChangeListener
 	Player player;
 	
 	CollisionManager colManager;
-	KotuneGame gameRef;
+	GameScreen gameRef;
 	
 	public static GameManager _instance = null;
 	
@@ -50,9 +51,9 @@ public class GameManager implements EnemyChangeListener
 		colManager = CollisionManager.getInstance(player);
 	}
 	
-	public void setGameInstance(KotuneGame gameRef)
+	public void setGameInstance(GameScreen gameScreen)
 	{
-		this.gameRef = gameRef;
+		this.gameRef = gameScreen;
 	}
 	
 	public boolean toggleGameState()
@@ -111,8 +112,8 @@ public class GameManager implements EnemyChangeListener
 
 	public void update()
 	{
-		if (!isPaused)
-		{
+		//if (!isPaused)
+		//{
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
 		    gameStage.act(Gdx.graphics.getDeltaTime());
@@ -129,7 +130,7 @@ public class GameManager implements EnemyChangeListener
 			{
 				addNewEnemy();
 			}
-		}
+		//}
 	}
 	
 	public static int randInt(int min, int max)
