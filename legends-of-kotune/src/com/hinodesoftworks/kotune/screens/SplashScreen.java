@@ -1,5 +1,5 @@
 /* 
- * Date: Apr 29, 2014
+ * Date: May 1, 2014
  * Project: legends-of-kotune
  * Package: com.hinodesoftworks.kotune.screens
  * @author Michael Mancuso
@@ -12,12 +12,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Background;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SplashScreen.
+ */
 public class SplashScreen implements Screen
 {
 	KotuneGame gameRef;
@@ -27,11 +30,19 @@ public class SplashScreen implements Screen
 	
 	
 
+	/**
+	 * Instantiates a new splash screen.
+	 *
+	 * @param ref the ref
+	 */
 	public SplashScreen(KotuneGame ref)
 	{
 		this.gameRef = ref;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta)
 	{
@@ -39,6 +50,9 @@ public class SplashScreen implements Screen
 		stage.draw();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height)
 	{
@@ -46,6 +60,9 @@ public class SplashScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show()
 	{
@@ -66,6 +83,9 @@ public class SplashScreen implements Screen
 		}, 2f);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide()
 	{
@@ -73,6 +93,9 @@ public class SplashScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause()
 	{
@@ -80,6 +103,9 @@ public class SplashScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume()
 	{
@@ -87,6 +113,9 @@ public class SplashScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose()
 	{

@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
 import com.hinodesoftworks.kotune.listeners.EnemyChangeListener;

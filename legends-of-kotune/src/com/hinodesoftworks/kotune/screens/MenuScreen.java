@@ -1,5 +1,5 @@
 /* 
- * Date: Apr 29, 2014
+ * Date: May 1, 2014
  * Project: legends-of-kotune
  * Package: com.hinodesoftworks.kotune.screens
  * @author Michael Mancuso
@@ -18,11 +18,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Background;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuScreen.
+ */
 public class MenuScreen implements Screen
 {
 	KotuneGame gameRef;
@@ -32,11 +35,19 @@ public class MenuScreen implements Screen
 	
 	TextButton playButton, instructButton, creditButton;
 
+	/**
+	 * Instantiates a new menu screen.
+	 *
+	 * @param ref the ref
+	 */
 	public MenuScreen(KotuneGame ref)
 	{
 		this.gameRef = ref;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta)
 	{
@@ -45,6 +56,9 @@ public class MenuScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height)
 	{
@@ -52,6 +66,9 @@ public class MenuScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show()
 	{
@@ -122,6 +139,9 @@ public class MenuScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide()
 	{
@@ -129,6 +149,9 @@ public class MenuScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause()
 	{
@@ -136,6 +159,9 @@ public class MenuScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume()
 	{
@@ -143,6 +169,9 @@ public class MenuScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose()
 	{

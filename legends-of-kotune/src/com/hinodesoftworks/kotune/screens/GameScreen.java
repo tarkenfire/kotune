@@ -1,5 +1,5 @@
 /* 
- * Date: Apr 29, 2014
+ * Date: May 1, 2014
  * Project: legends-of-kotune
  * Package: com.hinodesoftworks.kotune.screens
  * @author Michael Mancuso
@@ -11,8 +11,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
@@ -21,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Background;
 import com.hinodesoftworks.kotune.actors.Player;
@@ -29,6 +26,10 @@ import com.hinodesoftworks.kotune.listeners.GameEndedListener;
 import com.hinodesoftworks.kotune.listeners.ScoreListener;
 import com.hinodesoftworks.kotune.managers.GameManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameScreen.
+ */
 public class GameScreen implements Screen, GameEndedListener, ScoreListener
 {
 	
@@ -46,12 +47,20 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 	
 	KotuneGame gameRef;
 	
+	/**
+	 * Instantiates a new game screen.
+	 *
+	 * @param ref the ref
+	 */
 	public GameScreen (KotuneGame ref)
 	{
 		this.gameRef = ref;
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta)
 	{
@@ -59,6 +68,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height)
 	{
@@ -66,6 +78,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show()
 	{
@@ -121,6 +136,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide()
 	{
@@ -128,6 +146,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause()
 	{
@@ -135,6 +156,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume()
 	{
@@ -142,6 +166,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose()
 	{
@@ -149,6 +176,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.hinodesoftworks.kotune.listeners.GameEndedListener#onGameEnded()
+	 */
 	@Override
 	public void onGameEnded()
 	{
@@ -180,6 +210,9 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.hinodesoftworks.kotune.listeners.ScoreListener#onScore()
+	 */
 	@Override
 	public void onScore()
 	{

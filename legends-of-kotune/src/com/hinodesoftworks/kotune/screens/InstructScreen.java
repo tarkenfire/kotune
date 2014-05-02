@@ -1,3 +1,10 @@
+/* 
+ * Date: May 1, 2014
+ * Project: legends-of-kotune
+ * Package: com.hinodesoftworks.kotune.screens
+ * @author Michael Mancuso
+ *
+ */
 package com.hinodesoftworks.kotune.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -12,6 +19,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Background;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InstructScreen.
+ */
 public class InstructScreen implements Screen
 {
 	
@@ -22,11 +33,19 @@ public class InstructScreen implements Screen
 	
 	TextButton backButton;
 	
+	/**
+	 * Instantiates a new instruct screen.
+	 *
+	 * @param ref the ref
+	 */
 	public InstructScreen(KotuneGame ref)
 	{
 		gameRef = ref;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#render(float)
+	 */
 	@Override
 	public void render(float delta)
 	{
@@ -34,6 +53,9 @@ public class InstructScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resize(int, int)
+	 */
 	@Override
 	public void resize(int width, int height)
 	{
@@ -41,6 +63,9 @@ public class InstructScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#show()
+	 */
 	@Override
 	public void show()
 	{
@@ -74,6 +99,9 @@ public class InstructScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#hide()
+	 */
 	@Override
 	public void hide()
 	{
@@ -81,6 +109,9 @@ public class InstructScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#pause()
+	 */
 	@Override
 	public void pause()
 	{
@@ -88,6 +119,9 @@ public class InstructScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#resume()
+	 */
 	@Override
 	public void resume()
 	{
@@ -95,6 +129,9 @@ public class InstructScreen implements Screen
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.badlogic.gdx.Screen#dispose()
+	 */
 	@Override
 	public void dispose()
 	{
