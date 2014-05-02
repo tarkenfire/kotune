@@ -82,8 +82,8 @@ public class Player extends Actor
 	 * @return the player bounds
 	 */
 	public Rectangle getPlayerBounds()
-	{
-		return new Rectangle(x, y, getWidth(), getHeight());
+	{		
+		return new Rectangle(x, y, getWidth() - 50, getHeight() - 10);
 	}
 	
 	/**

@@ -22,7 +22,6 @@ import com.hinodesoftworks.kotune.screens.SplashScreen;
  */
 public class KotuneGame extends Game
 {		
-	GameScreen gameScreen;
 	SplashScreen splashScreen;
 	MenuScreen menuScreen;
 	InstructScreen instructScreen;
@@ -36,7 +35,6 @@ public class KotuneGame extends Game
 	@Override
 	public void create() 
 	{		
-		gameScreen = new GameScreen(this);
 		splashScreen = new SplashScreen(this);
 		menuScreen = new MenuScreen(this);
 		creditsScreen = new CreditsScreen(this);
@@ -58,7 +56,7 @@ public class KotuneGame extends Game
 	
 	public void transitionToGame()
 	{
-		setScreen(gameScreen);
+		setScreen(new GameScreen(this));
 	}
 	
 	public void transitionToCredits()

@@ -12,6 +12,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Background;
 import com.hinodesoftworks.kotune.actors.Player;
@@ -121,14 +123,14 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 	    pauseButton.setSize(100, 50);
 	    pauseButton.setBounds(50, Gdx.graphics.getHeight() - 60, 100, 50);
 	    
-	    pauseButton.addListener(new ChangeListener() 
+	    pauseButton.addListener(new ClickListener()
 	    {
-	        public void changed (ChangeEvent event, Actor actor) 
-	        {
-	        	gameManager.toggleGameState();
-	        	
-	        }
-	    });
+	    	public void clicked(InputEvent event, float x, float y) 
+	    	{
+	    		gameManager.toggleGameState();
+	    	}
+	    }
+	    );
 	    
 	    //add ui
 		gameManager.addActor(colText);

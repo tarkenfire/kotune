@@ -10,10 +10,14 @@ package com.hinodesoftworks.kotune.managers;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.hinodesoftworks.kotune.actors.Enemy;
 import com.hinodesoftworks.kotune.actors.Player;
 import com.hinodesoftworks.kotune.listeners.EnemyChangeListener;
@@ -30,6 +34,8 @@ public class GameManager implements EnemyChangeListener
 	
 	CollisionManager colManager;
 	GameScreen gameRef;
+	
+	Label pauseText;
 	
 	public static GameManager _instance = null;
 	
@@ -48,6 +54,18 @@ public class GameManager implements EnemyChangeListener
 		gameStage = stage;
 		this.player = player;
 		colManager = CollisionManager.getInstance(player);
+		
+		
+		
+		BitmapFont font = new BitmapFont();
+		font.setScale(6);
+		
+		LabelStyle style = new LabelStyle();
+	    style.fontColor = Color.WHITE;
+		style.font = font;
+		
+		pauseText = new Label("PAUSED", style);
+		pauseText.setBounds(Gdx.graphics.getWidth() / 2 - 200, Gdx.graphics.getHeight() / 2,100,40);
 	}
 	
 	public void setGameInstance(GameScreen gameScreen)
@@ -111,9 +129,11 @@ public class GameManager implements EnemyChangeListener
 
 	public void update()
 	{
-		//if (!isPaused)
-		//{
+		if (!isPaused)
+		{
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			
+			this.removeActor(pauseText);
 			
 		    gameStage.act(Gdx.graphics.getDeltaTime());
 		    gameStage.draw();
@@ -121,15 +141,24 @@ public class GameManager implements EnemyChangeListener
 			if (colManager.hasPlayerCollided())
 			{
 				player.killPlayer();
+				isPaused = false;
 			}
-			
-			Gdx.app.log("Enemies", Integer.toString(colManager.getEnemyCount()));
 			
 			if (colManager.getEnemyCount() < 3)
 			{
 				addNewEnemy();
 			}
-		//}
+		}
+		else
+		{
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			this.addActor(pauseText);
+		    gameStage.draw();
+		   
+		    
+		}
+		
+		
 	}
 	
 	public static int randInt(int min, int max)

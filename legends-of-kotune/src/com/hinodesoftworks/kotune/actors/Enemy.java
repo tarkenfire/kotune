@@ -69,7 +69,7 @@ public class Enemy extends Actor
 	 */
 	public Rectangle getEnemyBounds()
 	{
-		return new Rectangle(x, y, getWidth(), getHeight());
+		return new Rectangle(x, y, getWidth() - 50, getHeight() -10);
 	}
 
 	/* (non-Javadoc)
