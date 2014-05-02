@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Background;
 import com.hinodesoftworks.kotune.actors.Player;
 import com.hinodesoftworks.kotune.listeners.GameEndedListener;
@@ -41,10 +42,15 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 	
 	int score = 0;
 	
-	Rectangle rect;
-	
 	GameManager gameManager;
-	Vector2 victoryPoint;
+	
+	KotuneGame gameRef;
+	
+	public GameScreen (KotuneGame ref)
+	{
+		this.gameRef = ref;
+	}
+	
 
 	@Override
 	public void render(float delta)
@@ -151,7 +157,7 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 	    font.setScale(3);
 	    textButtonStyle.font = font;
 	    
-	    final TextButton retry = new TextButton("Game Over. Retry?", textButtonStyle);
+	    final TextButton retry = new TextButton("Game Over.", textButtonStyle);
 	    retry.setSize(200, 40);
 	    retry.setBounds(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 , 200, 40);
 		  
@@ -170,6 +176,8 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 	    gameManager.disposeAllEnemies();
 		gameManager.toggleGameState();
 		
+		gameRef.transitionToMenu();
+		
 	}
 
 	@Override
@@ -177,8 +185,6 @@ public class GameScreen implements Screen, GameEndedListener, ScoreListener
 	{
 		score++;
 		colText.setText(Integer.toString(score));
-		
-		
 	}
 
 }

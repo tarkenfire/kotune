@@ -13,11 +13,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.hinodesoftworks.kotune.KotuneGame;
 import com.hinodesoftworks.kotune.actors.Background;
 
@@ -56,6 +58,9 @@ public class MenuScreen implements Screen
 		stage = new Stage();
 		bg = new Background(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 
 				new Texture(Gdx.files.internal("data/main.png")));
+
+		Gdx.input.setInputProcessor(stage);
+
 		
 		//setup horrid text buttons
 		BitmapFont font = new BitmapFont();
@@ -82,25 +87,29 @@ public class MenuScreen implements Screen
 	    {
 	        public void changed (ChangeEvent event, Actor actor) 
 	        {
+	        	Gdx.app.log("STRING", "GAME");
 	        	gameRef.transitionToGame();
 	        }
 	    });
 	    
-	    instructButton.addListener(new ChangeListener() 
+	    instructButton.addListener(new ClickListener()
 	    {
-	        public void changed (ChangeEvent event, Actor actor) 
-	        {
-	        	gameRef.transitionToInstructions();
-	        }
-	    });
+	    	public void clicked(InputEvent event, float x, float y) 
+	    	{
+	    		Gdx.app.log("STRING", "INST");
+	    		gameRef.transitionToInstructions();
+	    	}
+	    }
+	    );
 	    
-	    creditButton.addListener(new ChangeListener() 
+	    creditButton.addListener(new ClickListener()
 	    {
-	        public void changed (ChangeEvent event, Actor actor) 
-	        {
-	        	gameRef.transitionToCredits();
-	        }
-	    });
+	    	public void clicked(InputEvent event, float x, float y) 
+	    	{
+	    		gameRef.transitionToCredits();
+	    	}
+	    }
+	    );
 	    
 	    
 	    //add to stage
